@@ -1,0 +1,308 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('./weather.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  padding: 20px 15px;
+  min-height: 100vh;
+}
+
+.app-title {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Search Input */
+.inputContainer {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 2rem;
+}
+
+.inputContainer .form-control {
+  box-shadow: none !important;
+  border-radius: 30px 0 0 30px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.inputContainer .form-control:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.3) !important;
+  background: #fff;
+}
+
+.inputContainer .btn {
+  border-radius: 0 30px 30px 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-left: none;
+  background: #6c63ff !important;
+  color: #fff !important;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+}
+
+.inputContainer .btn:hover {
+  background: #5a52f8 !important;
+  color: #fff !important;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+/* Current Weather Box */
+.box {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 550px;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.box img {
+  height: 100px;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.box .elements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.box .elements h5 {
+  font-size: 1.1rem;
+  color: #6c63ff;
+  margin: 0;
+}
+
+.box .elements h3 {
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.box .elements h4 {
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: #555;
+  margin: 0;
+}
+
+/* Forecast Section */
+.forecast {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Small Forecast Boxes */
+.smallBox {
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 250px;
+  min-width: 200px;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.smallBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.smallBox .elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.smallBox .elements h5 {
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #6c63ff;
+  margin: 0;
+}
+
+.smallBox .elements img {
+  height: 64px;
+  width: 64px;
+}
+
+.smallBox .elements h4 {
+  font-weight: 300;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: #555;
+  margin: 0;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media screen and (max-width: 768px) {
+  .mainContainer {
+    padding: 15px 10px;
+  }
+
+  .box {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 25px 20px;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .box img {
+    height: 80px;
+    width: 80px;
+  }
+
+  .forecast {
+    gap: 1rem;
+  }
+
+  .smallBox {
+    max-width: 45%;
+    min-width: 150px;
+    padding: 20px 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mainContainer {
+    padding: 10px 5px;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .inputContainer {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .inputContainer .form-control {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+
+  .inputContainer .btn {
+    padding: 10px 15px;
+  }
+
+  .box {
+    max-width: 95%;
+    padding: 20px 15px;
+    border-radius: 15px;
+    gap: 1rem;
+  }
+
+  .box img {
+    height: 65px;
+    width: 65px;
+  }
+
+  .forecast {
+    gap: 0.8rem;
+  }
+
+  .smallBox {
+    max-width: 44%;
+    min-width: 130px;
+    padding: 18px 12px;
+    border-radius: 15px;
+  }
+
+  .smallBox .elements img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .forecast {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .smallBox {
+    max-width: 90%;
+    width: 100%;
+  }
+}
